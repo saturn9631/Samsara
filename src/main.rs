@@ -1,15 +1,16 @@
 // import other modules
 #![no_std]
 #![no_main]
+mod boot {
+    use core::arch::asm;
+    use core::arch::gloal_asm;
+    global_asm! {
+    }
+}
 
 
 use core::panic::PanicInfo;
 use core::arch::asm;
-
-#[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
-    loop {}
-}
 
 static HELLO: &[u8] = b"Hello World!";
 #[no_mangle]
@@ -23,5 +24,10 @@ pub extern "C" fn _start() -> ! {
         }
     }
 
+    loop {}
+}
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
