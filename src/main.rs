@@ -1,12 +1,15 @@
 // import other modules
 #![no_std]
 #![no_main]
-mod boot {
+/*mod boot {
     use core::arch::asm;
     use core::arch::gloal_asm;
-    global_asm! {
-    }
-}
+    global_asm!(
+        ".section .text._start"
+    )
+
+    
+}*/
 
 
 use core::panic::PanicInfo;

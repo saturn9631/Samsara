@@ -24,7 +24,9 @@ Like all other Unix-like operating systems, Samsara starts the init system which
 
 # Sources
 - [Philipp Opperman's Rust Kernel Blog](https://os.phil-opp.com/minimal-rust-kernel/)
-- (Ed of Low Level Learning's "rust runs on Everything \(no operating system, just rust\))[https://www.youtube.com/watch?v=jZT8APrzvc4&list=TLPQMDcwODIwMjTLmLbfX5NDPA&index=1]
+- [Ed of Low Level Learning's "rust runs on Everything (no operating system, just rust)](https://www.youtube.com/watch?v=jZT8APrzvc4&list=TLPQMDcwODIwMjTLmLbfX5NDPA&index=1)
 - [Nir Lichtman's "Making a Bootloader using x86 Assembly](https://www.youtube.com/watch?v=xFrMXzKCXIc&list=TLPQMjcwODIwMjSPG5-G91fv2Q&index=3)
 - [Redox OS](https://www.redox-os.org)
 - Wikipedia on everything from plan 9, Unix/POSIX standards, Linux, language-based operating systems and more.
+- [Masen's "How to make a simple boot loader that reas a kernel into memory!](https://www.youtube.com/watch?v=6gLHG0qZ8HA&t=368s)
+- [Osdev wiki](https://wiki.osdev.org/Expanded_Main_Page)
