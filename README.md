@@ -32,3 +32,5 @@ Like all other Unix-like operating systems, Samsara starts the init system which
 - Wikipedia on everything from plan 9, Unix/POSIX standards, Linux, language-based operating systems and more.
 - [Masen's "How to make a simple boot loader that reas a kernel into memory!](https://www.youtube.com/watch?v=6gLHG0qZ8HA&t=368s)
 - [Osdev wiki](https://wiki.osdev.org/Expanded_Main_Page)
+- [Sphaerophoria's "Learning (and inferring) about OS bootstrapping"](https://youtu.be/gBykJMqDqH0?si=_8D6gCtjA29q67o0)
+- [Sphaerophoria's "Parsing info from bootloader in rust kernel"](https://youtu.be/WBDjsYnhaKI?si=JYO2hnj0MDo8nsHu)
