@@ -34,3 +34,4 @@ Like all other Unix-like operating systems, Samsara starts the init system which
 - [Osdev wiki](https://wiki.osdev.org/Expanded_Main_Page)
 - [Sphaerophoria's "Learning (and inferring) about OS bootstrapping"](https://youtu.be/gBykJMqDqH0?si=_8D6gCtjA29q67o0)
 - [Sphaerophoria's "Parsing info from bootloader in rust kernel"](https://youtu.be/WBDjsYnhaKI?si=JYO2hnj0MDo8nsHu)
+- [Queso Fuego's "UEFI Programming in c" playlist](https://youtube.com/playlist?list=PLT7NbkyNWaqZYHNLtOZ1MNxOt8myP5K0p&si=6n0UO7NrDC6-yDsX)
