@@ -30,9 +30,9 @@ static MULTIBOOT2_HDR: [u8; 64] = *include_bytes!("mb2_hdr_dump.bin");
 */
 
 use core::panic::PanicInfo;
-use core::arch::global_asm;
+//use core::arch::global_asm;
 
-global_asm!(include_str!("boot.asm"));
+//global_asm!(include_str!("boot.asm"));
 
 
 static HELLO: &[u8] = b"Hello World!";
@@ -43,7 +43,7 @@ pub extern "C" fn kernel_main() -> ! {
     for (i, &byte) in HELLO.iter().enumerate() {
         unsafe {
             *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2) = 0xb;
+            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
         }
     }
     loop {}
