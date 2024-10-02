@@ -28,6 +28,24 @@ static BOOT_HEAD: BootHeader = BootHeader
 #[link_section = ".text.multiboot2_header"]
 static MULTIBOOT2_HDR: [u8; 64] = *include_bytes!("mb2_hdr_dump.bin");
 */
+mod architecture {
+    /*pub trait manager {
+        // add code here
+    }*/
+    pub trait process_schedule_manager {
+        // add code here
+    }
+    pub trait memory_security_manager {
+        // add code here
+    }
+    pub trait file_resource_manager {
+        pub fn load_module() -> bool;
+    }
+    
+}
+mod process_manager;
+mod memory_manager;
+mod file_manager;
 
 use core::panic::PanicInfo;
 //use core::arch::global_asm;
@@ -38,7 +56,8 @@ use core::panic::PanicInfo;
 static HELLO: &[u8] = b"Hello World!";
 
 #[no_mangle]
-pub extern "C" fn kernel_main() -> ! {
+pub extern "C" fn _start() -> ! {
+    
     let vga_buffer = 0xb8000 as *mut u8;
     for (i, &byte) in HELLO.iter().enumerate() {
         unsafe {
@@ -53,3 +72,5 @@ pub extern "C" fn kernel_main() -> ! {
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
+
+
