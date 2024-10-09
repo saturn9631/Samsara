@@ -1,76 +1,114 @@
 #![no_std]
 #![no_main]
+#![feature(custom_test_frameworks)]
+#![test_runner(crate::test_runner)]
 
-/*use multiboot2_header::builder::Multiboot2HeaderBuilder;
-//Tried to make a multiboot2 header using inline assembly.
-global_asm!{
-    "header_start:",
-    "   dd 0xe85250d6", // magic for multiboot2
-    "   dd 0", // protected mode i386
-    "   dd header_end - header_start", // header length
-    "   dd 0x100000000 - (0xe85250d6 + 0 + (header_end - header_start))",
-    "header_end",
+
+mod vga_buffer;
+
+
+
+/*Boot using the osdev-rust bootloader
+use bootloader::{BootInfo, entry_point};
+entry_point!(kernel_main);
+#[no_mangle]
+fn kernel_main(boot_info: &'static BootInfo) -> ! {
+    vga_buffer::print_something();
+    loop {}
 }
+*/
 
-//Tried to make a multiboot header using a struct
-#[repr(C, packed)]
-struct BootHeader {
-    magic: u32,
+
+/*Boot using the osdev-rust bootimage
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
+    vga_buffer::print_something();
+
+
+    loop {}
+}*/
+
+
+
+/*Boot using custom Multiboot2 header struct
+#[no_mangle]
+#[repr(C, align(8))]
+pub struct Multiboot2 {
+    header_magic: u32,
+    arch: HeaderTagISA, //placeholder type
     length: u32,
-    size: u32,
     checksum: u32
 }
-static BOOT_HEAD: BootHeader = BootHeader 
 
+impl Multiboot2 {
+    pub const fn new(arch: HeaderTagISA) -> Self {
+        let magic = 0xe85250d6;
+        let length = 16;
+        let checksum = Self::calc_checksum(magic, arch, length);
+        Self {
+            header_magic: magic,
+            arch,
+            length,
+            checksum,
+        }
+    } 
+
+    pub const fn calc_checksum(magic: u32, arch: HeaderTagISA, length: u32) -> u32 {
+        (0x100000000 - magic as u64 - arch as u64 - length as u64) as u32
+    }
+
+    pub const fn verify_checksum(&self) -> bool {
+        let check = Self::calc_checksum(self.header_magic, self.arch, self.length);
+        check == self.checksum
+    }
+}
 
 #[used]
-#[no_mangle]
-#[link_section = ".text.multiboot2_header"]
-static MULTIBOOT2_HDR: [u8; 64] = *include_bytes!("mb2_hdr_dump.bin");
-*/
-mod architecture {
-    /*pub trait manager {
-        // add code here
-    }*/
-    pub trait process_schedule_manager {
-        // add code here
-    }
-    pub trait memory_security_manager {
-        // add code here
-    }
-    pub trait file_resource_manager {
-        pub fn load_module() -> bool;
-    }
-    
+pub static MULTIBOOT_HEADER: Multiboot2 = Multiboot2::new(HeaderTagISA::i386);
+
+#[repr(u32)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub enum HeaderTagISA {
+    i386 = 0,
+    MIPS32 = 4,
 }
-mod process_manager;
-mod memory_manager;
-mod file_manager;
-
-use core::panic::PanicInfo;
-//use core::arch::global_asm;
-
-//global_asm!(include_str!("boot.asm"));
-
-
-static HELLO: &[u8] = b"Hello World!";
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    
-    let vga_buffer = 0xb8000 as *mut u8;
-    for (i, &byte) in HELLO.iter().enumerate() {
-        unsafe {
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-        }
-    }
+    vga_buffer::print_something();
+
     loop {}
 }
+*/
 
+//Boot Using multiboot defined in a separate assembly file.
+use core::arch::global_asm;
+global_asm!(include_str!("boot.s"));
+
+#[no_mangle]
+//pub extern "c" fn kernel_main() -> ! {
+pub extern "C" fn _start() -> ! {
+    vga_buffer::print_something();
+
+    loop {}
+}
+//----------------------------------------------------
+
+
+use core::panic::PanicInfo;
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
+
     loop {}
 }
 
 
+/*
+#[cfg(test)]
+pub fn test_runner(tests: &[&dyn Fn()]) {
+    println!("Running {} tests", tests.len());
+    for test in tests {
+        test()
+    }
+}
+*/
