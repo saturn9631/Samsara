@@ -1,2 +1,5 @@
+.gitignore
 target
+flake.nix
+flake.lock
 shell.nix
