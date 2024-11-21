@@ -1,4 +1,0 @@
-[toolchain]
-channel = "stable"
-components = [ "rust-src", "rustc", "cargo" ]
-#components = [ "rust-src", "rust-std", "rustc", "cargo" ]
