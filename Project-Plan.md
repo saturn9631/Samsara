@@ -7,7 +7,7 @@
     - **Tagging File System (TFS):**
     - **Database File System (DBFS):**
     - **Linear Blockchain Access File System (LBAFS) and Archival Block Chain FIle System (ABCFS):**
-- **Heterogenous Computing:
+- **Heterogenous Computing:**
     - **Alderlake E and P cores:**
     - **ESP32 Sleep mode execution:**
     - **Tensor and Raytrace core control:**
