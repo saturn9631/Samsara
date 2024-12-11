@@ -14,6 +14,9 @@
 - **Self-Booting:**
 
 # Build Plan:
+1. Build I working executable out of assembly
+2. Build basic scheduling, memory management and filing.
+3. Build a parser
 
 # Tools
 The llvm assembler was ultimately chosen due to its toolchain customizability and its compatibility. Since Samsara and Yggdrasil have planned Rust interroptability and Cuda translation, it makes since that Yggdrasil would be translated into the same IR as the both of them. LLVM also has backends for x86, Arm, Risc-V and WebAssembly, allowing for Samsara/Yggdrasil to be available on these platforms. This decision is subject to reassessment and can change if another toolchain is deemed superior.
