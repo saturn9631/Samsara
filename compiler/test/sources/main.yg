@@ -1,0 +1,4 @@
+fn main(char[] args) -> u8 {
+	print("hello world");
+	return 0;
+}
