@@ -1,5 +1,6 @@
 .gitignore
-target
+target/
 flake.nix
 flake.lock
 shell.nix
+build/

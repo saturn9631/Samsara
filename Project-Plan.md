@@ -9,11 +9,14 @@
 - **Yggdrasil:**
     - Structs and enums are algebraic data types, with structs being product types and enums being sum types
     - Structs are tuples. All arrays are tuples with numeric index.
+    - Enums are tagged unions.
     - Modular integers wrap at a specified value, e.g u8 % 5 resets to 0 once it passes 4, and none modular integers are easily converted to modular intergers. Modular integers are used for array and slice access with the reset number being the length of the array/slice.
     - References and slices are used for barrowing values in the same way as Rust.
     - Permissions are attached to a resource that states what can be done to it: read, write, or execute, and these permission are the same as in files and memory pages/segments. Lifetimes are also a type of permission.
     - Lifetimes are more manipulable than in Rust, and barrowing and ownership rules are built of off lifetimes rather than being a native language feature.
     - Polymorphism is implemented through enums and pattern matching.
+    - File inodes are structs.
+    - There is a multilayer type system with each type layer managing the layer below it. Types of one layer are treated as values of the type above them.
 
 # Planned Features
 - **File Systems:**
