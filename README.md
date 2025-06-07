@@ -34,3 +34,4 @@ Like all other Unix-like operating systems, Samsara starts the init system which
 - ["Rust OS" by Uncle Scientist](https://youtube.com/playlist?list=PLib6-zlkjfXkdCjQgrZhmfJOWBk_C2FTY&si=hNXx1tYIztGVczor)
 [Building an OS by nanobyte](https://youtube.com/playlist?list=PLFjM7v6KGMpiH2G-kT781ByCNC_0pKpPN&si=aXwt_wyrZGCvCQvu)
 - ["Making an OS" by Daedalus Community](https://youtube.com/playlist?list=PLm3B56ql_akNcvH8vvJRYOc7TbYhRs19M&si=uwrciQ-i-nbe54B-)
+- ["Rust UEFI Book"](https://rust-osdev.github.io/uefi-rs/index.html) and ["Crate Uefi"](https://docs.rs/uefi/0.35.0/uefi/index.html) by Rust-OsDev
