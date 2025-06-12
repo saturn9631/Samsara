@@ -1,6 +1,10 @@
 #![no_main]
 #![no_std]
 
+extern crate alloc;
+use alloc::vec::Vec;
+use alloc::boxed::Box;
+
 use log::info;
 use uefi::{Status, entry, Identify, Result};
 use uefi::proto::BootPolicy;
@@ -20,7 +24,7 @@ fn main() -> Status {
 
     let error_code = print_image();
     info!("\"getFile\" returned with error code {}.", error_code);
-    let file = getFile("");
+    let file = getFile("esp");
 
     info!("----------------Done----------------");
     stall(30_000_000);
@@ -56,8 +60,7 @@ fn print_image() -> u8 {
     0
 }
 
-fn getFile(filename: &str) -> Option<()> {
-    let filesystem: Vec<Box<File>> = Vec::new();
+fn getFile(filename: &str) -> Option<()> { // -> Option<(dyn File, FileInfo)> {
     let mut filesystem_access = match get_image_file_system(image_handle()) {
         Ok(fs) => fs,
         Err(error) => {
@@ -65,21 +68,46 @@ fn getFile(filename: &str) -> Option<()> {
             return None;
         },
     };
-    let root = match filesystem_access.open_volume() {
+    let mut root = match filesystem_access.open_volume() {
         Ok(directory) => directory,
         Err(error) => {
             info!("Could not open path due to {} error. Second match.", error);
             return None;
         },
     };
-    info!("The root directory is: {}", &root);
-    let next = match root.read_entry_boxed() {
-        Ok(optional_box) => optional_box,
+    let root_info = match root.get_boxed_info::<FileInfo>() {
+        Ok(info) => info,
         Err(error) => {
             info!("Could not open path due to {} error. Third match.", error);
             return None;
         },
     };
+    let root_name = root_info.file_name();
+    info!("The root directory is: {}", root_name);
+    if root_name.as_bytes() == filename.as_bytes() {
+        let target = (root, root_info);
+    } else {
+        let mut directories: Vec<Box<FileInfo>> = Vec::new();
+        loop {
+            let directory = match root.read_entry_boxed() {
+                Ok(folder) => folder,
+                Err(error) => {
+                    info!("Could not open path due to {} error. Third match.", error);
+                    return None;
+                },
+            };
+            match directory {
+                Some(folder) => {
+                    let name = folder.file_name();
+                    info!("This directory is: {}", name);
+                    directories.push(folder);
+                },
+                None => {
+                    break;
+                },
+            }
+        }
+    }
 
     Some(())
 }
