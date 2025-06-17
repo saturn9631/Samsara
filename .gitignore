@@ -3,3 +3,4 @@ flake.lock
 shell.nix
 build/
 /bootloader/esp/NvVars
+/bootloader/bootloader.esp
