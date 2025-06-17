@@ -2,3 +2,4 @@ target/
 flake.lock
 shell.nix
 build/
+/bootloader/esp/NvVars
