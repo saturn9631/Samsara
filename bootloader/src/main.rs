@@ -4,15 +4,17 @@
 extern crate alloc;
 use alloc::vec::Vec;
 use alloc::boxed::Box;
+use alloc::string::String;
 
 use log::info;
 use uefi::{Status, entry, Identify, Result};
+use uefi::data_types::CStr16;
 use uefi::proto::BootPolicy;
 use uefi::proto::device_path::DevicePath;
 use uefi::proto::device_path::text::{AllowShortcuts, DevicePathToText, DisplayOnly};
 use uefi::proto::loaded_image::LoadedImage;
 use uefi::proto::media::load_file::LoadFile;
-use uefi::proto::media::file::{File, Directory, RegularFile, FileInfo};
+use uefi::proto::media::file::{File, Directory, RegularFile, FileInfo, FileMode, FileAttribute};
 use uefi::proto::media::fs::SimpleFileSystem;
 use uefi::boot::{SearchType, stall, open_protocol_exclusive, image_handle, locate_handle_buffer, get_image_file_system, exit_boot_services};
 //use uefi::data_types::PoolString;
@@ -84,30 +86,25 @@ fn getFile(filename: &str) -> Option<()> { // -> Option<(dyn File, FileInfo)> {
     };
     let root_name = root_info.file_name();
     info!("The root directory is: {}", root_name);
+    
+    let target: File;
+
     if root_name.as_bytes() == filename.as_bytes() {
-        let target = (root, root_info);
+        target = root;
     } else {
-        let mut directories: Vec<Box<FileInfo>> = Vec::new();
-        loop {
-            let directory = match root.read_entry_boxed() {
-                Ok(folder) => folder,
-                Err(error) => {
-                    info!("Could not open path due to {} error. Third match.", error);
-                    return None;
-                },
-            };
-            match directory {
-                Some(folder) => {
-                    let name = folder.file_name();
-                    info!("This directory is: {}", name);
-                    directories.push(folder);
-                },
-                None => {
-                    break;
-                },
-            }
-        }
+        /*
+        let target = 'search_dir: loop {
+        };
+        */
     }
 
     Some(())
+}
+
+fn open_file_from_info(info: FileInfo, parent: Directory) { // -> impl File {
+    let mut path_name: String = parent.get_boxed_info::<FileInfo>.file_name();
+    path_name.push_str("/");
+    path_name.push_str(info.file_name());
+    let path: CStr16 = path_name;
+    let file = parent.open(path, FileMode::Read, /* FileAttribute */);
 }
