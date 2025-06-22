@@ -1,6 +1,7 @@
 # Design
 ## Outline
 - **Core:**
+    - **Binder:** Essentially the top level part that holds all the of the Yggdrasil definitions and is the is what loads the FRM (which loads the others) and starts the PSM (which starts the other modules). In the case where the kernel self boots, it will also act as the bootloader.
     - **Yggdrasil Language:** the interface between the kernel and the userspace applications, yggdrasil is a domain-specific-language meant to encode system calls and even runtime modules (in the vein of the ebpf in linux)
         - **Object/Collection:** All objects are collections and all collections are objects. Accessing parts of an object can either been done via dot notation or indexing for fields, (if operators are considered the same as methods, then that can be used as an alternative to dot notation for methods.
         - **Operations/Iterator:** Since all objects are collection, all object operators are iterators (it is not decided as to whether operators are separate from methods).
@@ -18,11 +19,32 @@
         - **URL Paths:** All paths are shortened URLs. The scheme is the filesystem type, the authority the hosting drive as well as the containing session and the interface mailbox if applicable, the path in the middle and a optional Yggdrasil statement as the parameter.
         - **Type Hierarchy (Language Feature):** All file paths are types, with subpaths being subpaths, and all types (or possibly most) correspound to paths, sometimes in a virtual or ram based file system.
 ## Questions and Concerns
+- The binder might be a bootloader
+- The supervisor tree might not be necessary. Instead it could just be function returns.
 # Research
 ## Topics
 ## Sources
 - [Wikipedia](https://en.wikipedia.org)
     - [Hybrid Kernel](https://en.wikipedia.org/wiki/Hybrid_kernel)
+    - [Language-Based System](https://en.wikipedia.org/wiki/Language-based_system)
     - [Everything is a File](https://en.wikipedia.org/wiki/Everything_is_a_file)
     - [URL](https://en.wikipedia.org/wiki/URL)
     - [Inodes](https://en.wikipedia.org/wiki/Inode)
+    - [POSIX](https://en.wikipedia.org/wiki/POSIX)
+    - [Plan 9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs)
+    - [Linux](https://en.wikipedia.org/wiki/Linux)
+    - [Linux System](https://en.wikipedia.org/wiki/Linux_kernel)
+- [Youtube](https://www.youtube.com/)
+    - [Architecture 4021: Introductory UEFI by OpenSecurityTrianing2](https://www.youtube.com/playlist?list=PLUFkSN0XLZ-ltETI20mpXOCdqC8rdven6)
+    - [Masen's "How to make a simple boot loader that reads a kernel into memory!](https://www.youtube.com/watch?v=6gLHG0qZ8HA&t=368s)
+    - ["EFI Based Operating System Bootloader Series" by ThatOSDev Archive](https://youtube.com/playlist?list=PLdJN-tAX64g6UnGb1rD1wtnd5U6ebGlWd&si=8ibppSkqcbR03eRo)
+    - [Queso Fuego's "UEFI Programming in C"](https://youtube.com/playlist?list=PLT7NbkyNWaqZYHNLtOZ1MNxOt8myP5K0p&si=cz463aYuB8WpArCo)
+    - [sphaerophoria's "Writing an operating system"](https://youtube.com/playlist?list=PL980gcR1LE3LBuWuSv2CL28HsfnpC4Qf7&si=t5YaCValJDfG7DiE)
+    - ["Rust OS" by Uncle Scientist](https://youtube.com/playlist?list=PLib6-zlkjfXkdCjQgrZhmfJOWBk_C2FTY&si=hNXx1tYIztGVczor)
+    - [Building an OS by nanobyte](https://youtube.com/playlist?list=PLFjM7v6KGMpiH2G-kT781ByCNC_0pKpPN&si=aXwt_wyrZGCvCQvu)
+    - ["Making an OS" by Daedalus Community](https://youtube.com/playlist?list=PLm3B56ql_akNcvH8vvJRYOc7TbYhRs19M&si=uwrciQ-i-nbe54B-)
+    - [Ed of Low Level Learning's "rust runs on Everything (no operating system, just rust)"](https://www.youtube.com/watch?v=jZT8APrzvc4&list=TLPQMDcwODIwMjTLmLbfX5NDPA&index=1)
+    - [Nir Lichtman's "Making a Bootloader using x86 Assembly](https://www.youtube.com/watch?v=xFrMXzKCXIc&list=TLPQMjcwODIwMjSPG5-G91fv2Q&index=3)
+- [Osdev wiki](https://wiki.osdev.org/Expanded_Main_Page)
+- [Philipp Opperman's Rust Kernel Blog](https://os.phil-opp.com/minimal-rust-kernel/)
+- [Redox OS](https://www.redox-os.org)
