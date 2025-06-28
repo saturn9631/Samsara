@@ -32,9 +32,17 @@ function main(char[] args) {
     }
 }
 
-
-
-----------------------------------------------------------------
+### Objects and Collections
+Objects are collections and collections are objects.
+--------------------------------------------------------------
+class Data inherits object implements Query {
+    variable1: int,
+    variable2: bool,
+    assistant: function(int, &file) = (offset, target) {
+        info: &char = file.read(offset);
+        return info;
+    }
+}
 
 ## Questions and Concerns
 - The binder might be a bootloader
