@@ -18,6 +18,24 @@
         - **Drives:** All devices, phyiscal or virtual, are treated as storage drives with files for interacting with the device organized into a file system.
         - **URL Paths:** All paths are shortened URLs. The scheme is the filesystem type, the authority the hosting drive as well as the containing session and the interface mailbox if applicable, the path in the middle and a optional Yggdrasil statement as the parameter.
         - **Type Hierarchy (Language Feature):** All file paths are types, with subpaths being subpaths, and all types (or possibly most) correspound to paths, sometimes in a virtual or ram based file system.
+
+## Sketches
+### Syscall
+When a program requests a resource, such as memory, a file, or an executable, it makes a request to an allocator for the resource:
+--------------------------------------------------------------
+function main(char[] args) {
+    cubby: int = new Box(-16);
+    file_stream: jpeg = new filesys:/home/user/pic.jpg():
+    thread1: function = new function() {
+        sleep(5000);
+        println("Thread")
+    }
+}
+
+
+
+----------------------------------------------------------------
+
 ## Questions and Concerns
 - The binder might be a bootloader
 - The supervisor tree might not be necessary. Instead it could just be function returns.
@@ -50,6 +68,9 @@
         - [Zig for Impatient Devs](https://www.youtube.com/watch?v=5I4ZkmMS4-0)
     - ["Rust fo the impatient" by No Boilerplate](https://www.youtube.com/watch?v=br3GIIQeefY&t=22s)
     - [Various videos by Core Dumped](https://www.youtube.com/@CoreDumpped)
+        - [This Simple Algorithm Powers Real Interpreters: Pratt Parsing](https://www.youtube.com/watch?v=0c8b7YfsBKs)
+        - [IPC: To Share Memory Or To Send Messages](https://www.youtube.com/watch?v=Y2mDwW2pMv4)
+        - [How a Single Bit Inside Your Processor Shields Your Operating System's Integrity](https://www.youtube.com/watch?v=H4SDPLiUnv4&t=5s)
     - [CPU Scheduling | Chapter-5 | Operating System by Neso Academy](https://www.youtube.com/playlist?list=PLBlnK6fEyqRitWSE_AyyySWfhRgyA-rHk)
     - [DJ Ware](https://www.youtube.com/@CyberGizmo)
         - [Linux Internals](https://www.youtube.com/playlist?list=PLWK00SLo2KcQi1hlP2_allMWeG19MkQa7)
